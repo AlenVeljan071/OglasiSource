@@ -8,7 +8,6 @@ namespace OglasiSource.Core.Entities
         public ApplicationUser ApplicationUser { get; set; }
         public int SubCategoryId { get; set; }
         public SubCategory SubCategory { get; set; }
-        public string Name { get; set; }
         public decimal? Price { get; set; }
         public AddressEntity Address { get; set; }
         public int? VehicleBrandId { get; set; }

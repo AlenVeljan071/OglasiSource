@@ -6,6 +6,7 @@ namespace OglasiSource.Core.Responses.Advertisements
 {
     public class AdvertisementResponse
     {
+        public int Id { get; set; }
         public int ApplicationUserId { get; set; }
         public int SubCategoryId { get; set; }
         public string Name { get; set; }

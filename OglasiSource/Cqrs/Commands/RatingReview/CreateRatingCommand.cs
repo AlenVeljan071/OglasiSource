@@ -33,16 +33,7 @@ namespace OglasiSource.Api.Cqrs.Commands.RatingReview
                        return await _writeContext.ApplicationUser.AsNoTracking().AnyAsync(x => x.Id == id, cancellationToken: cancellation);
                    }).WithMessage("User with this id doesn't exist.");
 
-            When(x => x.EntityTypeRatingId == 2, () =>
-            {
-                RuleFor(x => x.EntityTypeId)
-               .MustAsync(async (id, cancellation) =>
-               {
-                   return await _writeContext.Comment.AsNoTracking().AnyAsync(x => x.Id == id, cancellationToken: cancellation);
-               }).WithMessage("Comment with this id doesn't exist.");
-
-                RuleFor(x => x.EntityTypeRatingId == 4).NotEmpty().WithMessage("Entity type must be Comment.");
-            });
+          
 
             RuleFor(x => x.Thumb).GreaterThan(-2).LessThan(2).NotEqual(0);
         }

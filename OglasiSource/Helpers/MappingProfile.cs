@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using OglasiSource.Api.Cqrs.Commands.Account;
 using OglasiSource.Api.Cqrs.Commands.Advertisement;
-using OglasiSource.Api.Cqrs.Commands.Comment;
 using OglasiSource.Api.Cqrs.Commands.RatingReview;
 using OglasiSource.Core.Constants;
 using OglasiSource.Core.Entities;
 using OglasiSource.Core.Enums;
 using OglasiSource.Core.Responses.Account;
 using OglasiSource.Core.Responses.Advertisements;
-using OglasiSource.Core.Responses.Comment;
 using OglasiSource.Core.Responses.Image;
 using OglasiSource.Core.Responses.RatingReview;
 
@@ -22,14 +20,18 @@ namespace OglasiSource.Api.Helpers
             #region Account
             CreateMap<SignAccountCommand, ApplicationUser>()
                 .ForMember(x => x.Avatar, o => o.MapFrom(x => (x.Avatar != null) ? Convert.FromBase64String(x.Avatar!) : null));
+            CreateMap<EditAccountCommand, ApplicationUser>()
+                .ForMember(x => x.Avatar, o => o.MapFrom(x => (x.Avatar != null) ? Convert.FromBase64String(x.Avatar!) : null));
             CreateMap<ApplicationUser, ApplicationUserResponse>()
                  .ForMember(x => x.Avatar, o => o.MapFrom(x => (x.Avatar != null) ? Convert.ToBase64String(x.Avatar!) : null));
+
             #endregion
 
             #region Advertisement
 
             CreateMap<CreateAdvertisementCommand, Advertisement>();
             CreateMap<UpdateAdvertisementCommand, Advertisement>();
+            CreateMap<UpdateAdvertisementPriceCommand, Advertisement>();
 
             CreateMap<Advertisement, AdvertisementResponse>()
             .ForMember(x => x.Shifter, o => o.MapFrom(x => x.Shifter != null ? DictionaryExtensions.GetValues(Core.Constants.Constants.Shifters).First(d => d.Id == x.Shifter.Value) : null))
@@ -65,16 +67,6 @@ namespace OglasiSource.Api.Helpers
 
             #endregion
 
-            #region Comment
-
-            CreateMap<CreateCommentCommand, Comment>();
-            CreateMap<UpdateCommentCommand, Comment>();
-            CreateMap<Comment, CommentResponse>()
-                .ForPath(x => x.EntityTypeComment.Id, o => o.MapFrom(x => x.EntityTypeComment.Id))
-                .ForPath(x => x.EntityTypeComment.Name, o => o.MapFrom(x => x.EntityTypeComment.Name))
-                .ForPath(x => x.ApplicationUser.Avatar, o => o.MapFrom(src => (src.ApplicationUser.Avatar != null) ? Convert.ToBase64String(src.ApplicationUser.Avatar!) : null));
-
-            #endregion
 
         }
 

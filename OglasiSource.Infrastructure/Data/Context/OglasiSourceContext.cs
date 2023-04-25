@@ -24,10 +24,6 @@ namespace OglasiSource.Infrastructure.Data.Context
         public DbSet<VehicleBrand> VehicleBrand { get; set; }
         public DbSet<VehicleModel> VehicleModel { get; set; }
        
-        // Comment
-        public DbSet<Comment> Comment { get; set; }
-        public DbSet<EntityTypeComment> EntityTypeComment { get; set; }
-
         //Rating and Review
         public DbSet<Review> Review { get; set; }
         public DbSet<Rating> Rating { get; set; }

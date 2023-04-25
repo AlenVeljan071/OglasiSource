@@ -9,12 +9,12 @@ namespace OglasiSource.Api.Cqrs.Commands.Advertisement
     public class DeleteAdvertisementCommand : IRequest<Unit>
     {
         public int Id { get; set; }
-        public class DeleteBankCommandValidator : AbstractValidator<DeleteAdvertisementCommand>
+        public class DeleteAdvertisementCommandValidator : AbstractValidator<DeleteAdvertisementCommand>
         {
             private readonly DbWriteContext _writeContext;
             private readonly IHttpContextAccessor _httpContextAccessor;
             private readonly ITokenService _tokenService;
-            public DeleteBankCommandValidator(DbWriteContext writeContext, IHttpContextAccessor httpContextAccessor, ITokenService tokenService)
+            public DeleteAdvertisementCommandValidator(DbWriteContext writeContext, IHttpContextAccessor httpContextAccessor, ITokenService tokenService)
             {
                 _writeContext = writeContext;
                 _httpContextAccessor = httpContextAccessor;
@@ -26,7 +26,7 @@ namespace OglasiSource.Api.Cqrs.Commands.Advertisement
                 RuleFor(x => x.Id).NotEmpty()
                       .MustAsync(async (id, cancellation) =>
                       {
-                          return await _writeContext.Advertisement.AsNoTracking().AnyAsync(x => x.Id == id, cancellationToken: cancellation);
+                          return await _writeContext.Advertisement.AsNoTracking().AnyAsync(x => x.Id == id && x.ApplicationUserId == userId, cancellationToken: cancellation);
                       }).WithMessage("Advertisement with this id doesn't exists.");
             }
         }

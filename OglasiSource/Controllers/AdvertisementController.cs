@@ -51,6 +51,19 @@ namespace OglasiSource.Api.Controllers
             return Ok(response);
         }
 
+        [HttpPut("price")]
+        [SwaggerOperation(Summary = "Edit advertisement price for user.", Description = "Edit advertisement price for user.")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<Unit>> EditAdvertisementPriceAsync(UpdateAdvertisementPriceCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
         [HttpDelete("{Id}")]
         [SwaggerOperation(Summary = "Delete advertisement for user.", Description = "Delete advertisement for user.")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -105,7 +118,22 @@ namespace OglasiSource.Api.Controllers
             return Ok(response);
         }
 
+        [HttpGet("vehiclebrand/{Id}")]
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = "Get data for vehiclebrand modal.", Description = "Get data for vehiclebrand modal.")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<VehicleBrandResponse>> GetVehicleBrandBycategoryIdAsync([FromRoute] GetVehicleBrandByCatergoryIdQuery request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
         [HttpGet("vehiclemodel/{Id}")]
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "Get data for vehiclemodel modal.", Description = "Get data for vehiclemodel modal.")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -119,7 +147,7 @@ namespace OglasiSource.Api.Controllers
         }
 
         [HttpPost("image")]
-        [SwaggerOperation(Summary = "Create album trainer.", Description = "Create album trainer.")]
+        [SwaggerOperation(Summary = "Create advertisement image.", Description = "Create advertisement image.")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
@@ -133,7 +161,7 @@ namespace OglasiSource.Api.Controllers
 
         [HttpGet("image/{Id}")]
         [AllowAnonymous]
-        [SwaggerOperation(Summary = "Get image trainer by id.", Description = "Get image trainer by id.")]
+        [SwaggerOperation(Summary = "Get image by id.", Description = "Get image by id.")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
@@ -144,6 +172,20 @@ namespace OglasiSource.Api.Controllers
             var response = await _mediator.Send(request);
             return Ok(response);
         }
+
+        [HttpDelete("image/{Id}")]
+        [SwaggerOperation(Summary = "Delete image for ads.", Description = "Delete image for ads.")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteImagetAsync([FromRoute] DeleteImageCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return NoContent();
+        }
+
 
     }
 }

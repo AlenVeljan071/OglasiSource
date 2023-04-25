@@ -14,7 +14,7 @@
             set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
         }
 
-        public int? UserId { get; set; }
+        public int? ApplicationUserId { get; set; }
         public string? Sort { get; set; }
 
 

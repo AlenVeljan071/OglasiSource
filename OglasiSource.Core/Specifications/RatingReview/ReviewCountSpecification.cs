@@ -10,7 +10,7 @@ namespace OglasiSource.Core.Specifications.RatingReview
     public class ReviewCountSpecification : BaseSpecification<Entities.Review>
     {
         public ReviewCountSpecification(ReviewSpecParams reviewSpecParams) : base(x =>
-            (!reviewSpecParams.UserId.HasValue || x.ApplicationUserId == reviewSpecParams.UserId) &&
+            (!reviewSpecParams.ApplicationUserId.HasValue || x.ApplicationUserId == reviewSpecParams.ApplicationUserId) &&
             (x.EntityTypeReviewId == reviewSpecParams.EntityTypeReviewId)
         )
         {

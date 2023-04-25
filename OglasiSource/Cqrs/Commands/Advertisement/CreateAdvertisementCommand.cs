@@ -13,7 +13,6 @@ namespace OglasiSource.Api.Cqrs.Commands.Advertisement
     public class CreateAdvertisementCommand : IRequest<CreateResponse>
     {
         public int SubCategoryId { get; set; }
-        public string Name { get; set; }
         public decimal? Price { get; set; }
         public int? VehicleBrandId { get; set; }
         public int? VehicleModelId { get; set; }

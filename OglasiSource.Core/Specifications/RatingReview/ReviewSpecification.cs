@@ -4,7 +4,7 @@
     {
 
         public ReviewSpecification(ReviewSpecParams reviewSpecParams) : base(x =>
-       (!reviewSpecParams.UserId.HasValue || x.ApplicationUserId == reviewSpecParams.UserId) &&
+       (!reviewSpecParams.ApplicationUserId.HasValue || x.ApplicationUserId == reviewSpecParams.ApplicationUserId) &&
         (x.EntityTypeReviewId == reviewSpecParams.EntityTypeReviewId))
         {
             AddInclude(x => x.ApplicationUser);

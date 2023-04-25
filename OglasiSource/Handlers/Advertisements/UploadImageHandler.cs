@@ -22,8 +22,8 @@ namespace OglasiSource.Api.Handlers.Trainer
         public async Task<Core.Classes.Image> Handle(UploadImageCommand request, CancellationToken cancellationToken)
         {
             var advertisement = await _readGenericRepository.GetByIdAsync(request.AdvertisementId);
-
-            var response = await _imgurService.UploadImage(request.Image, request.Name, request.Title, advertisement!.Id);
+            var name = "AutoOglasiSource";
+            var response = await _imgurService.UploadImage(request.Image, name, name, advertisement!.Id);
             return response;
         }
    

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using OglasiSource.Api.Cqrs.Commands.RatingReview;
+using OglasiSource.Api.Errors;
 using OglasiSource.Core.Constants;
 using OglasiSource.Core.Entities;
 using OglasiSource.Core.Enums;
@@ -28,6 +29,8 @@ namespace OglasiSource.Api.Handlers.RatingReview
         public async Task<RatingSetResponse> Handle(CreateRatingCommand request, CancellationToken cancellationToken)
         {
             int userId = _tokenService.ReadUserId(_httpContextAccessor.HttpContext!.Request.Headers["Authorization"][0]!);
+            if (userId == 0) throw new BadRequestException("401", "Unauthorized access.");
+            if (userId == request.EntityTypeId) throw new BadRequestException("400", "Cant yourself.");
             var rating = await _unitOfWork.Repository<Rating>()!.GetEntityWithSpec(new RatingSpecification(userId, request.EntityTypeId, request.EntityTypeRatingId));
             var entityRatingType = await _unitOfWork.Repository<EntityTypeRating>()!.GetByIdAsync(request!.EntityTypeRatingId);
             var ratingResponse = new RatingSetResponse();

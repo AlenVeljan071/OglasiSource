@@ -10,8 +10,7 @@ namespace OglasiSource.Infrastructure.Data.Config
         {
             builder.HasIndex(x => new { x.Name }).IsUnique();
             builder.HasData(
-                new EntityTypeReview { Id = 1, Name = "User" },
-                new EntityTypeRating { Id = 2, Name = "Comment" }
+                new EntityTypeRating { Id = 1, Name = "User" }
                 );
         }
     }

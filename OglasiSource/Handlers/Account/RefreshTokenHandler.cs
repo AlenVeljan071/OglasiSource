@@ -30,7 +30,7 @@ namespace OglasiSource.Api.Handlers.Account
             var newAccessToken = _tokenService.SecurityToken(_tokenService.ReadToken(token));
             var newRefreshToken = _tokenService.GenerateRefreshToken();
             user.RefreshToken = newRefreshToken;
-            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddHours(8);
+            user.RefreshTokenExpiryTime = DateTime.MaxValue;
             _unitOfWork.Repository<Core.Entities.ApplicationUser>()!.Update(user!);
             await _unitOfWork.Complete();
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPersonalTrainer.Api.Cqrs.Commands.Account;
 using OglasiSource.Api.Cqrs.Commands.Account;
+using OglasiSource.Api.Cqrs.Commands.Advertisement;
 using OglasiSource.Api.Cqrs.Queries.Account;
 using OglasiSource.Api.Cqrs.Queries.Advertisement;
 using OglasiSource.Core.Responses.Account;
@@ -57,6 +58,20 @@ namespace OglasiSource.Api.Controllers
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<SignInResponse>> LoginAsync(SignInCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+
+        [HttpPut()]
+        [SwaggerOperation(Summary = "Edit user.", Description = "Edit user.")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<Unit>> EditApplicationUserAsync(EditAccountCommand request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);

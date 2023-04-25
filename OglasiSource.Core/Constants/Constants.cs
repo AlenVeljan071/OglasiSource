@@ -15,22 +15,14 @@
         public static Dictionary<int, string> EntityTypeRating = new Dictionary<int, string>
         {
             {1, "User"},
-            {2, "Comment"}
         };
         public const string User = "User";
-        public const string Comment = "Comment";
 
         public static Dictionary<int, string> EntityTypeReview = new Dictionary<int, string>
         {
              {1, "User"},
         };
 
-        public static Dictionary<int, string> EntityTypeComment = new Dictionary<int, string>
-        {
-            {1, "Training"},
-           
-        };
-        
         public const double MinPercentage = 0;
         public const double MaxPercentage = 100;
         public const int NumberOfDays = 7;
