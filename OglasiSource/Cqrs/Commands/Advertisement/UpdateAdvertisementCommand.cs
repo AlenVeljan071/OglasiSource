@@ -69,7 +69,6 @@ namespace OglasiSource.Api.Cqrs.Commands.Advertisement
                           return await _writeContext.Advertisement.AsNoTracking().AnyAsync(x => x.Id == id && x.ApplicationUserId == userId, cancellationToken: cancellation);
                       }).WithMessage("Advertisement with this id doesn't exists.");
                
-                RuleFor(x => x.Name).SetValidator(new NameValidator());
             }
         }
     }

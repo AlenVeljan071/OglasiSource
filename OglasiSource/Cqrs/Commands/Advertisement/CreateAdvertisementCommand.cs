@@ -73,8 +73,6 @@ namespace OglasiSource.Api.Cqrs.Commands.Advertisement
                    return await _writeContext.SubCategory.AsNoTracking().AnyAsync(x => x.Id == id, cancellationToken: cancellation);
                }).WithMessage("Sub category with this id doesn't exist.");
                
-                RuleFor(x => x.Name).SetValidator(new NameValidator());
-              
             }
         }
   
